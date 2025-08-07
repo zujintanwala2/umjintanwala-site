@@ -1,0 +1,157 @@
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Navigation bar */
+.navbar {
+  background: #002147; /* dark blue like CA logo */
+  color: #fff;
+  padding: 10px 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.ca-logo {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.firm-name {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.designation {
+  font-size: 0.8rem;
+  color: #f0f0f0;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Hero section */
+.hero {
+  background-image: url('2f6a6d0f-468d-46d7-b054-64fb78fa748e.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+}
+
+.hero-overlay h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* Sections */
+.section {
+  padding: 60px 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #002147;
+}
+
+/* Services and partners grids */
+.services-grid,
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.service-card,
+.partner-card {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.service-card h3,
+.partner-card h3 {
+  margin-bottom: 10px;
+  color: #002147;
+}
+
+.service-card ul {
+  list-style: disc inside;
+  margin-left: 15px;
+}
+
+.partner-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Contact section */
+.contact {
+  background: #f4f4f4;
+}
+
+/* Footer */
+footer {
+  background: #002147;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
