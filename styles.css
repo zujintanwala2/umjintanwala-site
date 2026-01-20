@@ -142,7 +142,7 @@ h2 {
  */
 .partner-photo {
   width: 100%;
-  height: 200px;
+  height: 500px;
   object-fit: cover;
   /* Center the image so that neither the top nor bottom is disproportionately cropped */
   object-position: center;
