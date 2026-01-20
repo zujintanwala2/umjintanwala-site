@@ -156,3 +156,60 @@ footer {
   text-align: center;
   padding: 20px 0;
 }
+
+/* Services Details Page */
+.services-details {
+  padding: 80px 0;
+}
+
+.services-details h1 {
+  color: #002147;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.services-details .intro {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.service-detail {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-detail:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.service-detail h2 {
+  color: #002147;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #002147;
+  padding-bottom: 10px;
+}
+
+.service-detail ul {
+  list-style: disc inside;
+  margin-left: 0;
+}
+
+.service-detail li {
+  margin-bottom: 10px;
+  color: #555;
+  line-height: 1.6;
+}
