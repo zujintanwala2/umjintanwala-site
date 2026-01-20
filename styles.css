@@ -18,6 +18,11 @@ body {
   padding: 10px 0;
 }
 
+/* Justify the About section text */
+#about p {
+  text-align: justify;
+}
+
 .navbar .container {
   display: flex;
   justify-content: space-between;
