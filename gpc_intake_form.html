@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPC – Pro Bono Engagement Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-mid: #1a3260;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #faf7f2;
+    --cream-dark: #f0ebe0;
+    --text: #1c1c2e;
+    --text-muted: #6b7280;
+    --border: #d6cfc0;
+    --success: #2d7a4f;
+    --error: #b94040;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: var(--navy);
+    padding: 40px 24px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.08);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.05);
+  }
+
+  .header-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+
+  .badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: clamp(24px, 5vw, 34px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .header h1 span { color: var(--gold); }
+
+  .header p {
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 22px;
+  }
+
+  .slots-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .slots-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 1.8s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  /* Services */
+  .services-strip {
+    background: var(--navy-mid);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .service-tag {
+    color: var(--gold-light);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .service-tag::before {
+    content: '✦';
+    font-size: 9px;
+    color: var(--gold);
+  }
+
+  /* Form container */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  .form-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(15,31,61,0.08), 0 1px 4px rgba(15,31,61,0.04);
+    overflow: hidden;
+  }
+
+  .form-section {
+    padding: 32px 36px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .form-section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cream-dark);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .field-row.full { grid-template-columns: 1fr; }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .field:last-child { margin-bottom: 0; }
+
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  label .req {
+    color: var(--gold);
+    margin-left: 2px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    outline: none;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder, textarea::placeholder { color: #b0a898; font-weight: 300; }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--navy-mid);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(26,50,96,0.08);
+  }
+
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  /* Service checkboxes */
+  .service-options { display: flex; flex-direction: column; gap: 10px; }
+
+  .service-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--cream);
+  }
+
+  .service-checkbox:hover { border-color: var(--navy-mid); background: var(--white); }
+
+  .service-checkbox input[type="checkbox"] {
+    width: 18px; height: 18px;
+    min-width: 18px;
+    margin-top: 1px;
+    accent-color: var(--navy);
+    cursor: pointer;
+    border-radius: 4px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    padding: 0;
+  }
+
+  .service-checkbox.checked {
+    border-color: var(--navy);
+    background: rgba(15,31,61,0.03);
+  }
+
+  .service-checkbox-text strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .service-checkbox-text span {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* Slot selector */
+  .slot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .slot-btn {
+    padding: 9px 6px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+
+  .slot-btn:hover { border-color: var(--navy-mid); color: var(--navy); background: var(--white); }
+  .slot-btn.selected { border-color: var(--navy); background: var(--navy); color: var(--white); font-weight: 500; }
+
+  /* Disclaimer */
+  .disclaimer-box {
+    background: #fffbf0;
+    border: 1.5px solid #e8d9a0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+  }
+
+  .disclaimer-box p {
+    font-size: 12.5px;
+    color: #6b5c2e;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .disclaimer-box strong { font-weight: 500; color: #5a4a1e; }
+
+  .accept-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .accept-row input[type="checkbox"] {
+    width: 18px; height: 18px;
+    min-width: 18px;
+    margin-top: 2px;
+    accent-color: var(--navy);
+    cursor: pointer;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    padding: 0;
+  }
+
+  .accept-row span {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  .accept-row span strong { font-weight: 500; }
+
+  /* Submit */
+  .submit-section { padding: 28px 36px 36px; background: var(--cream); }
+
+  .submit-btn {
+    width: 100%;
+    padding: 15px 24px;
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-btn:hover {
+    background: var(--navy-mid);
+    box-shadow: 0 6px 20px rgba(15,31,61,0.25);
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active { transform: translateY(0); }
+
+  .submit-btn::after {
+    content: '→';
+    margin-left: 8px;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+
+  .submit-btn:hover::after { transform: translateX(4px); }
+
+  .submit-note {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  /* Success state */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 36px;
+  }
+
+  .success-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(45,122,79,0.1);
+    border: 2px solid rgba(45,122,79,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 26px;
+  }
+
+  .success-screen h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .success-screen p {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.65;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  /* Error messages */
+  .error-msg {
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 4px;
+    display: none;
+  }
+
+  .field.has-error input,
+  .field.has-error select,
+  .field.has-error textarea {
+    border-color: var(--error);
+  }
+
+  .field.has-error .error-msg { display: block; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .footer strong { color: var(--navy); font-weight: 500; }
+
+  @media (max-width: 560px) {
+    .form-section { padding: 24px 20px; }
+    .submit-section { padding: 24px 20px 32px; }
+    .field-row { grid-template-columns: 1fr; gap: 0; }
+    .slot-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-strip { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <div class="badge">Pro Bono Initiative · Limited Slots</div>
+    <h1>GPC <span>—</span> Governance,<br>Privacy & Control</h1>
+    <p>Register your interest for our complimentary engagement covering ISO 42001:2023 Gap Assessment and DPDPA Policy Drafting.</p>
+    <div class="slots-bar">
+      <div class="slots-dot"></div>
+      <span>10 slots available · First come, first served</span>
+    </div>
+  </div>
+</div>
+
+<!-- Services strip -->
+<div class="services-strip">
+  <div class="service-tag">ISO 42001:2023 Gap Assessment</div>
+  <div class="service-tag">DPDPA Policy Drafting</div>
+  <div class="service-tag">One-Time · No Cost</div>
+</div>
+
+<!-- Form -->
+<div class="container">
+  <div class="form-card">
+    <form id="gpcForm" novalidate>
+
+      <!-- Section 1: Contact Details -->
+      <div class="form-section">
+        <div class="section-label">Contact Details</div>
+
+        <div class="field-row">
+          <div class="field" id="field-name">
+            <label for="name">Full Name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" placeholder="e.g. Ravi Sharma">
+            <span class="error-msg">Please enter your full name.</span>
+          </div>
+          <div class="field" id="field-designation">
+            <label for="designation">Designation <span class="req">*</span></label>
+            <input type="text" id="designation" name="designation" placeholder="e.g. CFO, DPO, CTO">
+            <span class="error-msg">Please enter your designation.</span>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field" id="field-org">
+            <label for="org">Organisation Name <span class="req">*</span></label>
+            <input type="text" id="org" name="org" placeholder="Company / Firm name">
+            <span class="error-msg">Please enter your organisation name.</span>
+          </div>
+          <div class="field" id="field-industry">
+            <label for="industry">Industry / Sector <span class="req">*</span></label>
+            <select id="industry" name="industry">
+              <option value="">Select sector…</option>
+              <option>Banking & Financial Services</option>
+              <option>Fintech / Payments</option>
+              <option>Healthcare & Pharma</option>
+              <option>Information Technology</option>
+              <option>SaaS / Product</option>
+              <option>E-commerce / Retail</option>
+              <option>Manufacturing</option>
+              <option>Legal / Consulting</option>
+              <option>Education / EdTech</option>
+              <option>Government / PSU</option>
+              <option>Other</option>
+            </select>
+            <span class="error-msg">Please select your industry.</span>
+          </div>
+        </div>
+
+        <div class="field" id="field-email">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="your@email.com">
+          <span class="error-msg">Please enter a valid email address.</span>
+        </div>
+      </div>
+
+      <!-- Section 2: Service Selection -->
+      <div class="form-section">
+        <div class="section-label">Service Required</div>
+
+        <div class="service-options" id="serviceOptions">
+          <label class="service-checkbox" id="svc-iso">
+            <input type="checkbox" name="service" value="ISO 42001:2023 Gap Assessment" onchange="toggleService('svc-iso', this)">
+            <div class="service-checkbox-text">
+              <strong>ISO 42001:2023 Gap Assessment</strong>
+              <span>AI governance framework review · Gap mapping against ISO standard · Prioritised readiness report</span>
+            </div>
+          </label>
+
+          <label class="service-checkbox" id="svc-dpdpa">
+            <input type="checkbox" name="service" value="DPDPA Policy Drafting" onchange="toggleService('svc-dpdpa', this)">
+            <div class="service-checkbox-text">
+              <strong>DPDPA Policy Drafting</strong>
+              <span>Privacy Notice / Policy · Consent framework documentation · Data Principal rights procedures</span>
+            </div>
+          </label>
+
+          <label class="service-checkbox" id="svc-both">
+            <input type="checkbox" name="service" value="Both Services" onchange="toggleService('svc-both', this)">
+            <div class="service-checkbox-text">
+              <strong>Both Services (Recommended)</strong>
+              <span>Complete coverage of AI governance risk and data privacy compliance under Indian law</span>
+            </div>
+          </label>
+        </div>
+        <span class="error-msg" id="service-error" style="display:none; margin-top:8px;">Please select at least one service.</span>
+      </div>
+
+      <!-- Section 3: Context -->
+      <div class="form-section">
+        <div class="section-label">Your Context</div>
+
+        <div class="field" id="field-situation">
+          <label for="situation">Brief description of your current compliance situation <span class="req">*</span></label>
+          <textarea id="situation" name="situation" placeholder="e.g. We are a fintech using AI for credit scoring. We have no formal AI governance policy yet and are looking to become DPDPA compliant before Q3 2025…"></textarea>
+          <span class="error-msg">Please briefly describe your situation.</span>
+        </div>
+
+        <div class="field" id="field-referral">
+          <label for="referral">How did you hear about GPC?</label>
+          <select id="referral" name="referral">
+            <option value="">Select…</option>
+            <option>LinkedIn Page – GPC</option>
+            <option>LinkedIn Post</option>
+            <option>Personal Referral</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section 4: Preferred Slot -->
+      <div class="form-section">
+        <div class="section-label">Preferred Call Slot</div>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px; font-weight:300;">Select a preferred time window for a 30-minute discovery call (IST). Final slot will be confirmed via email.</p>
+
+        <div class="slot-grid" id="slotGrid">
+          <button type="button" class="slot-btn" onclick="selectSlot(this, 'Mon–Fri, 9–11 AM')">Mon–Fri<br><strong>9–11 AM</strong></button>
+          <button type="button" class="slot-btn" onclick="selectSlot(this, 'Mon–Fri, 11 AM–1 PM')">Mon–Fri<br><strong>11 AM–1 PM</strong></button>
+          <button type="button" class="slot-btn" onclick="selectSlot(this, 'Mon–Fri, 2–4 PM')">Mon–Fri<br><strong>2–4 PM</strong></button>
+          <button type="button" class="slot-btn" onclick="selectSlot(this, 'Mon–Fri, 4–6 PM')">Mon–Fri<br><strong>4–6 PM</strong></button>
+          <button type="button" class="slot-btn" onclick="selectSlot(this, 'Sat, 10 AM–12 PM')">Saturday<br><strong>10 AM–12 PM</strong></button>
+          <button type="button" class="slot-btn" onclick="selectSlot(this, 'Flexible / Any time')">Flexible<br><strong>Any time</strong></button>
+        </div>
+        <input type="hidden" id="slot" name="slot" value="">
+      </div>
+
+      <!-- Section 5: Disclaimer -->
+      <div class="form-section">
+        <div class="section-label">Scope & Disclaimer</div>
+
+        <div class="disclaimer-box">
+          <p>
+            <strong>Important — Please read before proceeding:</strong><br><br>
+            This is a <strong>one-time pro bono engagement</strong> offered as part of GPC's advisory practice launch. The scope is strictly limited to the deliverables specified above.<br><br>
+            This engagement <strong>does not include</strong> revisions after delivery, follow-up consultations, implementation support, or any ongoing advisory. Once the final deliverable is handed over, the engagement concludes.<br><br>
+            Any future engagements beyond this scope will be treated as a separate, <strong>paid advisory arrangement</strong>.
+          </p>
+        </div>
+
+        <label class="accept-row" id="disclaimerLabel">
+          <input type="checkbox" id="disclaimer" name="disclaimer" onchange="validateDisclaimer()">
+          <span>I have read and understood the above scope. I confirm that this is a <strong>one-time engagement</strong> with no expectation of follow-up support or ongoing advisory from GPC. <span class="req">*</span></span>
+        </label>
+        <span class="error-msg" id="disclaimer-error" style="margin-top:8px;">You must accept the disclaimer to proceed.</span>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-section">
+        <button type="submit" class="submit-btn">Submit My Request</button>
+        <p class="submit-note">Your information is kept confidential and used solely for this engagement.</p>
+      </div>
+
+    </form>
+
+    <!-- Success -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2>Request Received!</h2>
+      <p>Thank you for registering your interest. We will review your submission and reach out within <strong>2 business days</strong> to confirm your slot and schedule the discovery call.</p>
+      <br>
+      <p style="font-size:12px; color:#9ca3af;">GPC – Governance, Privacy and Control</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <strong>GPC – Governance, Privacy and Control</strong><br>
+    CA · CISA · DISA · FAFD · ISO 42001:2023 Lead Auditor
+  </div>
+</div>
+
+<script>
+  let selectedSlot = '';
+
+  function toggleService(id, checkbox) {
+    document.getElementById(id).classList.toggle('checked', checkbox.checked);
+    document.getElementById('service-error').style.display = 'none';
+  }
+
+  function selectSlot(btn, value) {
+    document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedSlot = value;
+    document.getElementById('slot').value = value;
+  }
+
+  function validateDisclaimer() {
+    const checked = document.getElementById('disclaimer').checked;
+    document.getElementById('disclaimer-error').style.display = checked ? 'none' : 'block';
+  }
+
+  function validateField(id, check) {
+    const fieldEl = document.getElementById('field-' + id);
+    if (!fieldEl) return check;
+    if (!check) fieldEl.classList.add('has-error');
+    else fieldEl.classList.remove('has-error');
+    return check;
+  }
+
+  document.getElementById('gpcForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+
+    valid = validateField('name', document.getElementById('name').value.trim() !== '') && valid;
+    valid = validateField('designation', document.getElementById('designation').value.trim() !== '') && valid;
+    valid = validateField('org', document.getElementById('org').value.trim() !== '') && valid;
+    valid = validateField('industry', document.getElementById('industry').value !== '') && valid;
+
+    const email = document.getElementById('email').value.trim();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    valid = validateField('email', emailOk) && valid;
+
+    const services = document.querySelectorAll('input[name="service"]:checked');
+    if (services.length === 0) {
+      document.getElementById('service-error').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('service-error').style.display = 'none';
+    }
+
+    valid = validateField('situation', document.getElementById('situation').value.trim() !== '') && valid;
+
+    const disclaimer = document.getElementById('disclaimer').checked;
+    if (!disclaimer) {
+      document.getElementById('disclaimer-error').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('disclaimer-error').style.display = 'none';
+    }
+
+    if (!valid) {
+      const firstError = document.querySelector('.has-error, [style*="block"]');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // All valid — collect data and submit to Formspree
+    const selectedServices = Array.from(services).map(s => s.value).join(', ');
+
+    const formData = {
+      'Full Name': document.getElementById('name').value.trim(),
+      'Designation': document.getElementById('designation').value.trim(),
+      'Organisation': document.getElementById('org').value.trim(),
+      'Industry / Sector': document.getElementById('industry').value,
+      'Email': email,
+      'Services Required': selectedServices,
+      'Current Compliance Situation': document.getElementById('situation').value.trim(),
+      'How they heard about GPC': document.getElementById('referral').value || 'Not specified',
+      'Preferred Call Slot': selectedSlot || 'Not specified',
+      'Disclaimer Accepted': 'Yes — one-time scope acknowledged'
+    };
+
+    const submitBtn = document.querySelector('.submit-btn');
+    submitBtn.textContent = 'Submitting…';
+    submitBtn.disabled = true;
+
+    fetch('https://formspree.io/f/myknvydp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok || data.next) {
+        document.getElementById('gpcForm').style.display = 'none';
+        document.getElementById('successScreen').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        submitBtn.textContent = 'Submit My Request';
+        submitBtn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly.');
+      }
+    })
+    .catch(() => {
+      submitBtn.textContent = 'Submit My Request';
+      submitBtn.disabled = false;
+      alert('Network error. Please check your connection and try again.');
+    });
+  });
+</script>
+</body>
+</html>
