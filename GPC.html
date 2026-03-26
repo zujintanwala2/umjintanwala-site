@@ -475,7 +475,7 @@
 
 <div class="page-wrap">
   <div class="card">
-    <form id="gpcForm" novalidate>
+    <form id="gpcForm" action="https://formspree.io/f/xeepqdep" method="POST" novalidate>
       <div class="form-section">
         <div class="section-label">Basic Details</div>
 
@@ -643,11 +643,10 @@
   }
 
   document.getElementById('gpcForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+    
 
     let valid = true;
 
-    valid = validateField('name', document.getElementById('name').value.trim() !== '') && valid;
     valid = validateField('org', document.getElementById('org').value.trim() !== '') && valid;
 
     const email = document.getElementById('email').value.trim();
@@ -673,12 +672,11 @@
       if (firstError) {
         firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+            e.preventDefault();
       return;
     }
 
-    document.getElementById('gpcForm').style.display = 'none';
-    document.getElementById('successScreen').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
   });
 </script>
 
