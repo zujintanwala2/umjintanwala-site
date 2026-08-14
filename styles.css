@@ -252,3 +252,14 @@ footer {
 .hero-button-secondary {
   background: transparent;
 }
+
+
+.service-page-actions {
+  margin: 0 0 36px;
+}
+
+.service-page-actions .hero-button-secondary {
+  background: #ffffff;
+  color: #002147;
+  border-color: #002147;
+}
